@@ -9,6 +9,8 @@ const Filtros = () => {
         placeholder="Rick, Morty, Beth, Alien, ...etc"
         name="nome"
       />
+      <button className="danger">Pesquisar</button>
+      <button className="danger">Limpar filtro</button>
     </div>
   );
 };
