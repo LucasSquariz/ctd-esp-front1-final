@@ -1,20 +1,9 @@
+import { Personagem } from "../../types/types";
+
 export const FETCH_PERSONAGEM_INICIAL = 'FETCH_PERSONAGENS';
 export const FETCH_PERSONAGENS_SUCCESS = 'FETCH_PERSONAGENS_SUCCESS';
 export const FETCH_PERSONAGENS_ERROR = 'FETCH_PERSONAGENS_ERROR';
-export const FETCH_PERSONAGENS_NEXT_PAGE = 'FETCH_PERSONAGENS_NEXT_PAGE';
-
-export interface Personagem {
-    id: number;
-    name: string;
-    status: string;
-    species: string;
-    type: string;
-    gender: string;
-    origin: object;
-    location: object;
-    image: string;
-    episode: string;
-}
+export const FAVORITE_PERSONAGEM = 'FAVORITE_PERSONAGEM';
 
 export const fetchPersonagemIniciais = () => {
     return {
@@ -33,6 +22,13 @@ export const fetchPersonagemError = (errorMessage: string) => {
     return {
         type: FETCH_PERSONAGENS_ERROR,
         payload: { errorMessage },
+    }
+}
+
+export const favoritePersonagem = (id: number, add: boolean) => {
+    return {
+        type: FAVORITE_PERSONAGEM,  
+        payload: {id, add}      
     }
 }
 
@@ -60,3 +56,4 @@ export const fetchPersonagemThunkChangePage = (page: string) => {
         }
     }
 }
+

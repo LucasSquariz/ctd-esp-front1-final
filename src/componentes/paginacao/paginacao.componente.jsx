@@ -31,8 +31,7 @@ const Paginacao = () => {
   }
 
   return (
-    <div className="paginacao">
-      {console.log(page)}
+    <div className="paginacao">      
       <button onClick={handlerPrevPage} className={"primary"}>
         Anterior
       </button>

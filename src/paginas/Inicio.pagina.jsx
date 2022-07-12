@@ -2,7 +2,7 @@ import Filtros from "../componentes/personagens/filtros.componente";
 import GradePersonagens from "../componentes/personagens/grade-personagens.componente";
 import Paginacao from "../componentes/paginacao/paginacao.componente";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPersonagemIniciais, fetchPersonagemThunk } from '../componentes/store/actions/personagem.action';
+import { fetchPersonagemThunk } from '../componentes/store/actions/personagem.action';
 import { useEffect } from 'react';
 
 
@@ -32,10 +32,9 @@ const PaginaInicio = () => {
   })
 
   return (
-    <div className="container">
-      <div className="actions">        
-        <h3>Catálogo de Personagens</h3>
-        <button className="danger">Test Button</button>
+    <div className="container">      
+      <div className="actions">              
+        <h3>Catálogo de Personagens</h3>        
       </div>
       <Filtros />
       <Paginacao />

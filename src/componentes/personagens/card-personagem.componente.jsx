@@ -1,5 +1,9 @@
 import BotaoFavorito from "../botoes/botao-favorito.componente";
 import "./card-personagem.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { favoritePersonagem } from "../store/actions/personagem.action";
+import { useEffect } from "react";
+
 
 /**
  * Card para cada personagem dentro da grade de personagem.
@@ -10,16 +14,27 @@ import "./card-personagem.css";
  * @returns Elemento JSX
  */
 const CardPersonagem = ({personagem}) => {
+  const dispatch = useDispatch();  
+  const isFav = useSelector(state => {
+    return state.personagens.favoritos.includes(personagem.id);
+  });
+  
+  const favoritos= useSelector(state => {
+    return state.personagens.favoritos;
+  });
+  const favoritarPersonagem = (idPersonagem) =>{
+    dispatch(favoritePersonagem(idPersonagem, !isFav))   
+  }  
 
   return (
-    <div className="card-personagem">            
+    <div className="card-personagem">                
       <img
         src={personagem.image}
         alt={personagem.name}
       />
       <div className="card-personagem-body">
         <span>{personagem.name}</span>
-        <BotaoFavorito isFavorito={false} />
+        <BotaoFavorito handlerOnCLick={() => favoritarPersonagem(personagem.id)} isFavorito={isFav}/>
       </div>
     </div>
   );
