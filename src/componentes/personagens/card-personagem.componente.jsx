@@ -17,11 +17,8 @@ const CardPersonagem = ({personagem}) => {
   const dispatch = useDispatch();  
   const isFav = useSelector(state => {
     return state.personagens.favoritos.includes(personagem.id);
-  });
+  });  
   
-  const favoritos= useSelector(state => {
-    return state.personagens.favoritos;
-  });
   const favoritarPersonagem = (idPersonagem) =>{
     dispatch(favoritePersonagem(idPersonagem, !isFav))   
   }  
