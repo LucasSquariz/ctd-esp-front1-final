@@ -7,6 +7,8 @@ export const FAVORITE_PERSONAGEM = 'FAVORITE_PERSONAGEM';
 export const ADD_FAVORITE_PERSONAGEM = 'ADD_FAVORITE_PERSONAGEM';
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
 export const FETCH_PERSONAGENS_BY_NAME_SUCCESS = 'FETCH_PERSONAGENS_BY_NAME_SUCCESS';
+export const FETCH_PERSONAGENS_BY_ID_SUCCESS = 'FETCH_PERSONAGENS_BY_ID_SUCCESS';
+export const FETCH_PERSONAGENS_EPISODES_SUCCESS = 'FETCH_PERSONAGENS_EPISODES_SUCCESS';
 
 export const fetchPersonagemIniciais = () => {
     return {
@@ -24,6 +26,20 @@ export const fetchPersonagemSuccess = (personagens: Personagem[]) => {
 export const fetchPersonagemByNameSuccess = (personagens: Personagem[]) => {    
     return {
         type: FETCH_PERSONAGENS_BY_NAME_SUCCESS,
+        payload: { personagens },
+    }
+}
+
+export const fetchPersonagemByIdSuccess = (personagens: Personagem[]) => {    
+    return {
+        type: FETCH_PERSONAGENS_BY_ID_SUCCESS,
+        payload: { personagens },
+    }
+}
+
+export const fetchPersonagemEpisodes = (personagens: Personagem[]) => {    
+    return {
+        type: FETCH_PERSONAGENS_EPISODES_SUCCESS,
         payload: { personagens },
     }
 }
@@ -87,6 +103,30 @@ export const fetchPersonagemByName = (name: string) => {
             const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${name}`)
             const json = await response.json()                      
             dispatch(fetchPersonagemByNameSuccess(json))            
+        } catch (e:any) {
+            dispatch(fetchPersonagemError(e.message));
+        }
+    }
+}
+
+export const fetchPersonagemById = (id: number) => {    
+    return async function (dispatch: any) {                
+        try {
+            const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`)
+            const json = await response.json()                      
+            dispatch(fetchPersonagemByIdSuccess(json))            
+        } catch (e:any) {
+            dispatch(fetchPersonagemError(e.message));
+        }
+    }
+}
+
+export const fetchEpisodesPersonagem = (url: string) => {    
+    return async function (dispatch: any) {                
+        try {
+            const response = await fetch(url)
+            const json = await response.json()                      
+            dispatch(fetchPersonagemByIdSuccess(json))            
         } catch (e:any) {
             dispatch(fetchPersonagemError(e.message));
         }

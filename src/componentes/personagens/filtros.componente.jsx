@@ -8,6 +8,7 @@ const Filtros = () => {
   const handlerSearchByName = (validator, name) => {
     dispatch(searchByName(validator, name))
   }
+  
 
   return (
     <div className="filtros" >
@@ -17,9 +18,9 @@ const Filtros = () => {
           type="text"
           placeholder="Rick, Morty, Beth, Alien, ...etc"
           name="nome"
-        />
-        <button className="danger" type="submit" onClick={(e) => handlerSearchByName(true, e.target.parentElement.getElementsByTagName("input")[0].value)}>Pesquisar</button>
-        <button className="danger"onClick={(e) => handlerSearchByName(false, '')}>Limpar filtro</button>
+          onChange={(e) => handlerSearchByName(true, e.target.value)}
+        />        
+        <button className="danger" onClick={() => handlerSearchByName(false, '')}>Limpar filtro</button>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { FETCH_PERSONAGEM_INICIAL, FETCH_PERSONAGENS_SUCCESS, FAVORITE_PERSONAGEM, ADD_FAVORITE_PERSONAGEM, FETCH_PERSONAGENS_BY_NAME_SUCCESS, SEARCH_BY_NAME } from "../actions/personagem.action";
+import { FETCH_PERSONAGEM_INICIAL, FETCH_PERSONAGENS_SUCCESS, FAVORITE_PERSONAGEM, ADD_FAVORITE_PERSONAGEM, FETCH_PERSONAGENS_BY_NAME_SUCCESS, SEARCH_BY_NAME, FETCH_PERSONAGENS_BY_ID_SUCCESS, FETCH_PERSONAGENS_EPISODES_SUCCESS } from "../actions/personagem.action";
 
 type Action = {
     type: string;
@@ -8,10 +8,12 @@ type Action = {
 const initialState = {
     personagensAPI: [],
     isFetching: true,
-    personagemFavoritosById: [],
+    searchByName: { enabled: false, name: '' },
     personagemByName: [],
+    personagemFavoritosById: [],
     favoritos: [],
-    searchByName: {enabled: false , name: ''},
+    personagemByIdDetalhe: [],
+    personagemEpisodesDetalhe:[]
 }
 
 export const personagens = (state = initialState, action: Action) => {
@@ -30,21 +32,31 @@ export const personagens = (state = initialState, action: Action) => {
             return {
                 ...state,
                 personagemByName: action.payload,
-                searchByName:{
+                searchByName: {
                     enabled: false,
                     name: ''
                 }
             }
-        case SEARCH_BY_NAME:            
+        case FETCH_PERSONAGENS_BY_ID_SUCCESS:
             return {
                 ...state,
-                personagemByName: action.payload.validator 
-                ? state.personagemByName 
-                : [],
+                personagemByIdDetalhe: action.payload,
+            }
+        case FETCH_PERSONAGENS_EPISODES_SUCCESS:
+            return {
+                ...state,
+                personagemEpisodesDetalhe: action.payload,
+            }
+        case SEARCH_BY_NAME:
+            return {
+                ...state,
+                personagemByName: action.payload.validator
+                    ? state.personagemByName
+                    : [],
                 searchByName: {
                     enabled: action.payload.validator,
                     name: action.payload.name
-                }                
+                }
             }
         case FAVORITE_PERSONAGEM:
             return {
