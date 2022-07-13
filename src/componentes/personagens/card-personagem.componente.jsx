@@ -2,8 +2,6 @@ import BotaoFavorito from "../botoes/botao-favorito.componente";
 import "./card-personagem.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { favoritePersonagem } from "../store/actions/personagem.action";
-import { useEffect } from "react";
-
 
 /**
  * Card para cada personagem dentro da grade de personagem.
@@ -21,7 +19,7 @@ const CardPersonagem = ({personagem}) => {
   
   const favoritarPersonagem = (idPersonagem) =>{
     dispatch(favoritePersonagem(idPersonagem, !isFav))   
-  }  
+  }   
 
   return (
     <div className="card-personagem">                
