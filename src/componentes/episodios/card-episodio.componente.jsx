@@ -1,4 +1,5 @@
 import "./card-episodio.css";
+import { useSelector } from 'react-redux';
 
 /**
  * Card para cada episódio na visualização do personagem.
@@ -8,13 +9,20 @@ import "./card-episodio.css";
  *
  * @returns Elemento JSX
  */
-const CardEpisodio = () => {
-  return (
-    <div className="card-episodio">
-      <h4>Close Rick-counters of the Rick Kind</h4>
+const CardEpisodio = ({episodes}) => {  
+  const episodiosState = useSelector((state) => {
+    return state.personagens?.personagemEpisodesDetalhe?.episodes?.results
+  })
+  
+  let numberEpisodes = episodes.split('/');
+  const filteredEpisode = episodiosState.filter((a)=> a.id === parseInt(numberEpisodes[numberEpisodes.length - 1]))
+  
+  return (       
+    <div className="card-episodio">          
+      <h4>{filteredEpisode[0]?.name || ''}</h4>
       <div>
-        <span>S01E01</span>
-        <span>Lançado em: April 7, 2014</span>
+        <span>{filteredEpisode[0]?.episode || ''}</span>
+        <span>{filteredEpisode[0]?.air_date || ''}</span>
       </div>
     </div>
   );

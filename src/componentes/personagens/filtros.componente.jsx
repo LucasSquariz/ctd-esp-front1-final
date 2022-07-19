@@ -6,7 +6,7 @@ const Filtros = () => {
   const dispatch = useDispatch();
 
   const handlerSearchByName = (validator, name) => {
-    dispatch(searchByName(validator, name))
+    dispatch(searchByName(validator, name));    
   }
   
 

@@ -2,7 +2,7 @@ import Filtros from "../componentes/personagens/filtros.componente";
 import GradePersonagens from "../componentes/personagens/grade-personagens.componente";
 import Paginacao from "../componentes/paginacao/paginacao.componente";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPersonagemThunk, fetchPersonagemByName } from '../componentes/store/actions/personagem.action';
+import { fetchPersonagemThunk, fetchPersonagemByName, fetchEpisodesPersonagem } from '../componentes/store/actions/personagem.action';
 import { useEffect } from 'react';
 
 
@@ -33,9 +33,10 @@ const PaginaInicio = () => {
   useEffect(() => {
     if (isFetching === true) {
       dispatch(fetchPersonagemThunk(1));
+      dispatch(fetchEpisodesPersonagem('https://rickandmortyapi.com/api/episode'));
     }
     if (searchByNamez.enabled === true) {
-      dispatch(fetchPersonagemByName(searchByNamez.name));
+      dispatch(fetchPersonagemByName(searchByNamez.name));      
     }
   })
 

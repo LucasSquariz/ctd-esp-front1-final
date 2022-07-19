@@ -29,6 +29,7 @@ export const personagens = (state = initialState, action: Action) => {
                 personagensAPI: action.payload,
             }
         case FETCH_PERSONAGENS_BY_NAME_SUCCESS:
+            console.log(state, action)
             return {
                 ...state,
                 personagemByName: action.payload,
